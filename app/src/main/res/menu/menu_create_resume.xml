@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.jntuh.buildresume.CreateResumeActivity">
+    <item  android:id="@+id/jntuk"
+        android:title="JNTUK"/>
+    <item  android:id="@+id/jntua"
+        android:title="JNTUA"/>
+    <item  android:id="@+id/jntuh"
+        android:title="JNTUH"/>
+</menu>

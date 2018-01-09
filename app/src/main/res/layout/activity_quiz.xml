@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="#B7B7B7"
+    android:orientation="vertical"
+    tools:context="com.indianservers.universitynotifications.Quiz">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/question_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/come"
+                android:gravity="right"
+                android:paddingRight="20dp"
+                android:text="hello"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/come"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/question_timer"
+                android:layout_alignParentEnd="true"
+                android:tint="#ffff"
+                android:src="@drawable/grid" />
+
+            <ImageView
+                android:id="@+id/out"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/slideon"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:layout_marginLeft="100dp"
+            android:id="@+id/chooseoption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <GridView
+                android:id="@+id/selectoptiongridview"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:columnWidth="90dp"
+                android:numColumns="auto_fit"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center" />
+        </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad">
+        </com.google.android.gms.ads.AdView>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="visible"></android.support.v4.view.ViewPager>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:tint="@color/colorPrimary"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:id="@+id/left"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/slide" />
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView1"
+                android:layout_weight="2"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad"/>
+            <ImageView
+                android:tint="@color/colorPrimary"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:id="@+id/right"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/slideon" />
+        </LinearLayout>
+    </LinearLayout>
+
+    </LinearLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/colorPrimary">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <Button
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Practice Mode"
+        android:id="@+id/practice"/>
+    <Button
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Test Mode"
+        android:id="@+id/test"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+</LinearLayout>

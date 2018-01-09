@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.indianservers.universitynotifications.UniversityChooseActivity">
+<TextView
+    android:id="@+id/jntuk"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:text="JNTUK"
+    android:textStyle="bold"
+    android:textSize="20dp"
+    android:textColor="@color/colorPrimaryDark"
+    android:background="@drawable/textview_bg"
+    android:gravity="center" />
+    <TextView
+        android:id="@+id/jntua"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="JNTUA"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/textview_bg"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/jntuh"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="JNTUH"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/textview_bg"
+        android:gravity="center" />
+</LinearLayout>

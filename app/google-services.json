@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "39872184733",
+    "firebase_url": "https://universitesnotifications.firebaseio.com",
+    "project_id": "universitesnotifications",
+    "storage_bucket": "universitesnotifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39872184733:android:bc84d4456099cfd5",
+        "android_client_info": {
+          "package_name": "com.indianservers.universitynotifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39872184733-qje0cc3j4ui5eapj4rcq8v381l35vdk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb_T0BAPhMC2_digFAK28LE5SG0W-o6tU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    card_view:cardElevation="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Name"
+            android:id="@+id/qsubject"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            />
+            <TextView
+                android:textStyle="bold"
+                android:text="TRANSPORTATION ENGINEERING – I"
+                android:textSize="17sp"
+                android:layout_weight="3.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/examname"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="Regular"
+                android:textStyle="bold"
+                android:layout_weight="3.8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/examtype" />
+            <TextView
+                android:text="2017"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/year"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pdflink"
+            android:visibility="gone"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

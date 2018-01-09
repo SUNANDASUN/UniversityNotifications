@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.indianservers.universitynotifications">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/jntu"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/jntu" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+
+        <activity
+            android:name=".UniversityChooseActivity"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NotificationsActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".DashboardActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".SingleNotificationActivity"
+            android:configChanges="orientation|screenSize" />
+        <!-- Firebase Notifications -->
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- ./Firebase Notifications -->
+        <activity
+            android:name=".OtherActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".RRBExamsActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Topics" />
+        <activity
+            android:name=".Quiz"
+            android:theme="@style/AppThemee" />
+        <activity android:name=".Gestures" />
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".SetActivity" />
+        <activity android:name=".GateActivity" />
+        <activity android:name=".IBPSActivity" />
+        <activity
+            android:name=".ExamActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppThemee" />
+        <activity android:name=".QuestionFullscreenActivity"></activity>
+    </application>
+
+</manifest>

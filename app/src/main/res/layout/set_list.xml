@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="16dp"
+    android:orientation="vertical"
+    android:background="#B7B7B7"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/setname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Set 1"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+
+</RelativeLayout>
