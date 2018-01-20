@@ -52,11 +52,11 @@ public class QuestionsAdapter extends PagerAdapter {
 
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.question_fragment, container, false);
-
-        question = (TextView)itemView.findViewById(R.id.question);
-       question.setText(allQuestions.get(position).getQuestion());
-        Log.d("QuestionAdapter","question-----"+allQuestions.get(position).getQuestion());
-        ((ViewPager) container).addView(itemView);
+//
+//        question = (TextView)itemView.findViewById(R.id.question);
+//       question.setText(allQuestions.get(position).getQuestion());
+//        Log.d("QuestionAdapter","question-----"+allQuestions.get(position).getQuestion());
+//        ((ViewPager) container).addView(itemView);
         return itemView;
     }
     @Override

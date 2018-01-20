@@ -11,15 +11,14 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/examnameibps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textStyle="bold"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="30dp"
-        tools:ignore="MissingConstraints" />
+        android:textSize="18sp" />
 
     <TextView
         android:layout_marginTop="10dp"
@@ -28,7 +27,6 @@
         android:id="@+id/examidibps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         tools:layout_editor_absoluteX="286dp"
         tools:layout_editor_absoluteY="57dp"
         tools:ignore="MissingConstraints" />

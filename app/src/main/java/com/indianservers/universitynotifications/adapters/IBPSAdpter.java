@@ -54,7 +54,20 @@ public class IBPSAdpter extends BaseAdapter {
         TextView textView2 = (TextView) rowView.findViewById(R.id.examidibps);
         IbpsCommonClas ibpsCommonClas = setNames.get(position);
         textView1.setText(ibpsCommonClas.getExamName());
-        textView2.setText(ibpsCommonClas.getExamId());
+        try{
+            String tv2 = ibpsCommonClas.getExamId().toString();
+            if(tv2.equals(null)){
+                textView2.setVisibility(View.GONE);
+            }
+            else {
+                textView2.setVisibility(View.VISIBLE);
+                textView2.setText(ibpsCommonClas.getExamId());
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+
 
 
         return rowView;

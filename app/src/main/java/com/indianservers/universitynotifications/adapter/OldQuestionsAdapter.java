@@ -55,7 +55,7 @@ public class OldQuestionsAdapter extends BaseAdapter {
         }
         TextView subject = (TextView)view.findViewById(R.id.qsubject);
         TextView subjectdesc = (TextView)view.findViewById(R.id.year);
-        TextView examname = (TextView)view.findViewById(R.id.examname);
+        TextView examname = (TextView)view.findViewById(R.id.examnamee);
         TextView examtype = (TextView)view.findViewById(R.id.examtype);
         TextView pdflink = (TextView)view.findViewById(R.id.pdflink);
 

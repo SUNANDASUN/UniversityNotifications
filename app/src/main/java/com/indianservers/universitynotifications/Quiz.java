@@ -1,5 +1,6 @@
 package com.indianservers.universitynotifications;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.Tracker;
 import com.indianservers.universitynotifications.adapters.QuestionsFragmentAdapter;
 import com.indianservers.universitynotifications.adapters.SingleGridview;
 import com.indianservers.universitynotifications.classes.QuestionsClass;
@@ -49,7 +51,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadlineSelectedListener,View.OnClickListener {
-
     public int setId, topicId, subjectId, totalQuestions;
     public static List<QuestionsClass> questionsClassList = new ArrayList<>();
     Cursor cursor;
@@ -81,24 +82,19 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
     QuestionsFragmentAdapter questionsAdapter;
     SingleGridviewAdapter singleGridviewAdapter;
     private InterstitialAd mInterstitialAd;
+    private ProgressDialog mProgressDialog;
     private AdView mAdView,mAdViw;
     public Runnable updateTimer = new Runnable() {
-
         public void run() {
-
             timeInMilliseconds = SystemClock.uptimeMillis() - starttime;
-
             updatedtime = timeSwapBuff + timeInMilliseconds;
-
             secs = (int) (updatedtime / 1000);
             mins = secs / 60;
             secs = secs % 60;
-
             questionTimer.setText("" + mins + ":" + String.format("%02d", secs));
             questionTimer.setTextColor(Color.WHITE);
             handler.postDelayed(this, 0);
         }
-
     };
     String selection = assertHelper.KEY_QSETID + " =? " + " AND " + assertHelper.KEY_QTID + " =? ";
 
@@ -122,14 +118,20 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
         left.setOnClickListener(this);
         right = (ImageView)findViewById(R.id.right);
         right.setOnClickListener(this);
-        mobileAd();
+        mAdView = (AdView)findViewById(R.id.adView);
+        mAdViw = (AdView)findViewById(R.id.adView1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdViw.loadAd(adRequest1);
         gridView = (GridView)findViewById(R.id.selectoptiongridview);
         linearLayout = (LinearLayout)findViewById(R.id.chooseoption);
         viewPager = (ViewPager) findViewById(R.id.pager);
         Firebase.setAndroidContext(Quiz.this);
-        if(positionitem==15||positionitem==30||positionitem==45||positionitem==70||positionitem==85){
-            interstitialAd();
-        }
+        mProgressDialog = new ProgressDialog(Quiz.this);
+        mProgressDialog.setMessage("Please Wait...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         type = settings.getString("RRBTYPE", "0");
         if(type.equals("Offline")){
@@ -141,7 +143,7 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
             setName = intent.getStringExtra("SetName");
             Log.v("sai", "set Name------------" + setName);
             totalQuestions = intent.getIntExtra("TotalQuestions", 0);
-
+            mProgressDialog.dismiss();
             databaseConnection();
             questionsClassList = getQuestions();
             QuestionsFragmentAdapter questionsAdapter = new QuestionsFragmentAdapter(getSupportFragmentManager(), this, questionsClassList);
@@ -161,7 +163,6 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
                         // let's say userB is actually 2nd in the list
                         int i = 1;
                         for(DataSnapshot ds:dataSnapshot.getChildren()){
-
                             QuestionsClass questionsClass = new QuestionsClass();
                             questionsClass.setQ( String.valueOf(ds.child("Q").getValue()));
                             questionsClass.setCA( String.valueOf(ds.child("CA").getValue()));
@@ -174,6 +175,7 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
                             singleGridview.setQno(String.valueOf(i++));
                             singleGridviews.add(singleGridview);
                             questionsClassList.add(questionsClass);
+                            mProgressDialog.dismiss();
                         }
                         questionsAdapter = new QuestionsFragmentAdapter(getSupportFragmentManager(), Quiz.this, questionsClassList);
                         viewPager.setAdapter(questionsAdapter);
@@ -227,6 +229,7 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
                         singleGridviews.add(singleGridview);
                         questionsClassList.add(questionsClass);
                     }
+                    mProgressDialog.dismiss();
                     questionsAdapter = new QuestionsFragmentAdapter(getSupportFragmentManager(), Quiz.this, questionsClassList);
                     viewPager.setAdapter(questionsAdapter);
                     questionsAdapter.getItem(0);
@@ -235,6 +238,9 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
                     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            comein.setVisibility(View.GONE);
+                            comeout.setVisibility(View.VISIBLE);
+                            linearLayout.setVisibility(View.GONE);
                             positionitem = position;
                             questionsAdapter.getItem(positionitem);
                             viewPager.setCurrentItem(positionitem);
@@ -255,87 +261,6 @@ public class Quiz extends AppCompatActivity implements QuestionFragment.OnHeadli
         //getting data from the sets intent
     }
 
-    public void setFavQuestion() {
-
-        assertHelper = new DatabaseAssertHelper(this);
-        assertHelper.updateFavValue(fav, QID);
-    }
-//    public void updateFavValue(){
-//        assertHelper = new DatabaseAssertHelper(this);
-//
-//        sqLiteDatabase = assertHelper.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        Log.v("sai","fav value in update function-1111------------"+fav);
-//        values.put(assertHelper.KEY_FAV,fav);
-//
-//        String selection1 = assertHelper.KEY_QID+"= ?"+QID;
-//        Log.v("sai","fav value in update function-------------"+fav);
-//       // String[] selectionArgs1 = {String.valueOf(QID)};
-//        Log.v("sai","Values value in update function-----2525--------"+values.get(assertHelper.KEY_FAV));
-//        if (QID!=0&&fav!=0) {
-//            int rowId = sqLiteDatabase.update(assertHelper.TABLE_QUESTIONS, values, selection1, null);
-//            Log.v("sai","Row Id in update function-------------"+rowId);
-//        }
-//
-//
-//
-//
-//    }
-public void interstitialAd() {
-    mInterstitialAd = newInterstitialAd();
-    loadInterstitial();
-}
-private InterstitialAd newInterstitialAd() {
-        InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.InterstitialAd));
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                showInterstitial();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-
-            }
-
-            @Override
-            public void onAdClosed() {
-
-            }
-        });
-        return interstitialAd;
-    }
-    private void showInterstitial() {
-        // Show the ad if it's ready. Otherwise toast and reload the ad.
-        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-
-        }
-    }
-    private void loadInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .setRequestAgent("android_studio:ad_template").build();
-        mInterstitialAd.loadAd(adRequest);
-    }
-    private void mobileAd() {
-        MobileAds.initialize(this, getString(R.string.banner_ad));
-
-        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
-        // values/strings.xml.
-        mAdView = (AdView) findViewById(R.id.adView);
-        mAdViw = (AdView)findViewById(R.id.adView1);
-
-        // Create an ad request. Check your logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        // Start loading the ad in the background.
-        mAdView.loadAd(adRequest);
-        mAdViw.loadAd(adRequest);
-    }
     public void databaseConnection() {
 
         assertHelper = new DatabaseAssertHelper(this);

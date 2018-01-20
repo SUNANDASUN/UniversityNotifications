@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.indianservers.universitynotifications.app.Config;
 import com.indianservers.universitynotifications.util.NotificationUtils;
@@ -41,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
         LinearLayout notifications = (LinearLayout)findViewById(R.id.notifications);
         notifications.setOnClickListener(this);
+
         LinearLayout results = (LinearLayout)findViewById(R.id.results);
         results.setOnClickListener(this);
         LinearLayout academiccalender = (LinearLayout)findViewById(R.id.calender);

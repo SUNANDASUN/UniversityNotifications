@@ -34,20 +34,12 @@ public class GridViewAdapter extends BaseAdapter {
         this.arraylist = new ArrayList<SubjectClass>();
         this.arraylist.addAll(names);
     }
-    public GridViewAdapter(Context context, ArrayList<String> strings) {
-        this.strings = strings;
-        this.context = context;
-    }
 
     @Override
     public int getCount() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String type = type = sharedPreferences.getString("RRBTYPE", "0");
-        if(type.equals("online")){
-            return strings.size();
-        }else {
             return AllSubjects.size();
-        }
 
     }
 
@@ -72,11 +64,7 @@ public class GridViewAdapter extends BaseAdapter {
         rowView = inflater.inflate(R.layout.grid_list_item, null);
 
         TextView textView = (TextView) rowView.findViewById(R.id.textView);
-        if(type.equals("online")){
-            textView.setText(strings.get(position));
-        }else {
             textView.setText(AllSubjects.get(position).getSName());
-        }
         return rowView;
     }
     // Filter Class

@@ -16,6 +16,9 @@ public class SubjectClass {
         this.id = id1;
         this.SName = sname;
     }
+    public SubjectClass(String sname){
+        this.SName = sname;
+    }
 
     public int getId() {
         return id;

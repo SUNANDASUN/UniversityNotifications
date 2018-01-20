@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
@@ -69,6 +70,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
     private String examMode;
     private WebViewClient client;
     private String count;
+    private Tracker mTracker;
     public QuestionFragment() {
     }
 
@@ -114,7 +116,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
             option3 = bundle.getString("opt3");
             option4 = bundle.getString("opt4");
             option5 = bundle.getString("opt5");
-
             description = bundle.getString("desc");
             correctAnswer = bundle.getInt("correct");
             totalQuestions = bundle.getInt("totalQuestions");
@@ -133,8 +134,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         examMode = sharedPrefs.getString("exammode","0");
         //getting id's from the layout
-        questionText = (TextView) itemView.findViewById(R.id.question);
-        questionText.setOnClickListener(this);
         questionCount = (TextView) itemView.findViewById(R.id.question_count);
         opt1 = (WebView) itemView.findViewById(R.id.opt1);
         opt1.setOnTouchListener(this);
@@ -163,18 +162,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
         optIndex.add(Arrays.asList(options).indexOf(R.id.opt2));
         optIndex.add(Arrays.asList(options).indexOf(R.id.opt3));
         optIndex.add(Arrays.asList(options).indexOf(R.id.opt4));
-        if (option5.equals("null")) {
+        try
+        {
+            if (option5.equals("null")||option5.equals("")||option5.equals(null)) {
 
-        }else {
-            optIndex.add(Arrays.asList(options).indexOf(R.id.opt5));
+            }else {
+                optIndex.add(Arrays.asList(options).indexOf(R.id.opt5));
+            }
+            opt5.setOnClickListener(this);
+        }catch (NullPointerException e){
+
         }
+
 
         //doing action when the button is clicked
         opt1.setOnClickListener(this);
         opt2.setOnClickListener(this);
         opt3.setOnClickListener(this);
         opt4.setOnClickListener(this);
-        opt5.setOnClickListener(this);
+
 
         finish1.setOnClickListener(this);
 
@@ -187,7 +193,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1800,800);
 
                 questionwebview.setVisibility(View.VISIBLE);
-                questionwebview.setInitialScale(18*13);
+
+                questionwebview.getSettings().setTextSize(WebSettings.TextSize.LARGER);
                 questionwebview.getSettings().setBuiltInZoomControls(true);
                 questionwebview.getSettings().setDisplayZoomControls(true);
                 questionwebview.getSettings().setDomStorageEnabled(true);
@@ -197,32 +204,54 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
                 questionwebview.getSettings().setAppCacheEnabled(true);
                 questionwebview.getSettings().setLoadsImagesAutomatically(true);
                 questionwebview.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-                questionwebview.loadData("<html><body>" + question+ "</body></html>", "text/html", "utf-8");
+                if(question.contains("img src")){
+
+                    questionwebview.loadData("<html><body>" + question+ "</body></html>", "text/html", "utf-8");
+
+                }else {
+                    questionwebview.loadData("<html><body>" + question+ "</body></html>", "text/html", "utf-8");
+
+                }
         questionCount.setText(count + "/" + totalQuestions);
         questionCount.setTextColor(Color.BLACK);
+        if(option1.contains("img src"))
+        {
+            int start = question.indexOf("src=\"") + 5;
+            int end = question.indexOf("\"", start);
 
-        opt1.setVisibility(View.VISIBLE);
-        opt1.loadData("A) " + option1,"text/html", "utf-8");
+            String src = question.substring(start, end);
+            opt1.setVisibility(View.VISIBLE);
+            opt1.loadData("A) " + option1,"text/html", "utf-8");
+
+        }else {
+            opt1.setVisibility(View.VISIBLE);
+            opt1.loadData("A) " + option1,"text/html", "utf-8");
+        }
+
         opt2.setVisibility(View.VISIBLE);
         opt2.loadData("B) " + option2,"text/html", "utf-8");
         opt3.setVisibility(View.VISIBLE);
         opt3.loadData("C) " + option3,"text/html", "utf-8");
         opt4.setVisibility(View.VISIBLE);
         opt4.loadData("D) " + option4,"text/html", "utf-8");
-        if(option5.equals("null")){
-            opt5.setVisibility(GONE);
-        }else {
-            if(option5.contains("img src")){
-                opt5.setVisibility(View.VISIBLE);
-                opt5.loadData("E) " + option5,"text/html", "utf-8");
-                opt5.setInitialScale(8*5);
+        try
+        {
+            if(option5.equals("null")||option5.equals("")||option5.equals(null)){
+                opt5.setVisibility(GONE);
             }else {
-                opt5.setVisibility(View.VISIBLE);
-                opt5.loadData("E) " + option5,"text/html", "utf-8");
+                if(option5.contains("img src")){
+                    opt5.setVisibility(View.VISIBLE);
+                    opt5.loadData("E) " + option5,"text/html", "utf-8");
+                    opt5.setInitialScale(8*5);
+                }else {
+                    opt5.setVisibility(View.VISIBLE);
+                    opt5.loadData("E) " + option5,"text/html", "utf-8");
+                }
             }
-
+        }catch (NullPointerException e){
 
         }
+
 
         if (counter == totalQuestions) {
 
@@ -402,11 +431,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener,V
                 rough.putExtra("question",question);
                 startActivity(rough);
                 break;
-            case R.id.question:
-                Intent intent = new Intent(getContext(),QuestionFullscreenActivity.class);
-                intent.putExtra("webviewid",question);
-                startActivity(intent);
-                break;
+//                 case R.id.question:
+//                Intent intent = new Intent(getContext(),QuestionFullscreenActivity.class);
+//                intent.putExtra("webviewid",question);
+//                startActivity(intent);
+//                break;
 
 
         }

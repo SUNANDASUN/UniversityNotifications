@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class QuestionFullscreenActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class QuestionFullscreenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String webviewlink = intent.getStringExtra("webviewid");
         fullquestion.getSettings().setBuiltInZoomControls(true);
+        fullquestion.getSettings().setTextSize(WebSettings.TextSize.LARGER);
         fullquestion.getSettings().setDisplayZoomControls(true);
         fullquestion.getSettings().setDomStorageEnabled(true);
         fullquestion.getSettings().setSupportZoom(true);

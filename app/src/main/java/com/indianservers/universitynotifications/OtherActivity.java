@@ -392,7 +392,7 @@ public class OtherActivity extends AppCompatActivity {
 
         for(DataSnapshot ds :dataSnapshot.getChildren()){
             OldQuestionsModel d= new OldQuestionsModel();
-            d.setExamname(ds.getValue(OldQuestionsModel.class).getExamname());
+            d.setExamname(ds.getValue(OldQuestionsModel.class).getSubject());
             d.setExamtype(ds.getValue(OldQuestionsModel.class).getExamtype());
             d.setPdflink(ds.getValue(OldQuestionsModel.class).getPdflink());
             d.setSubject(ds.getValue(OldQuestionsModel.class).getSubject());
