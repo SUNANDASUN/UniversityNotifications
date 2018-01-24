@@ -82,6 +82,7 @@
         android:textStyle="bold" />
 
     <ListView
+        android:visibility="gone"
             android:divider="#B7B7B7"
             android:dividerHeight="10dp"
             android:layout_marginTop="10dp"
@@ -89,6 +90,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>
+    <WebView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gateresultwebview">
+    </WebView>
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"/>

@@ -159,7 +159,6 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
         questionwebview.loadData("<html><body>" + question+ "</body></html>", "text/html", "utf-8");
         qunumber.setText(count + "/" + totalQuestions);
         qunumber.setTextColor(Color.BLACK);
-
         if(gatequtype.equals("MCQ")){
             linearLayout.setVisibility(View.VISIBLE);
             natanswer.setVisibility(View.GONE);
@@ -211,10 +210,10 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     }
                 }else {
                     if(s.length() != 0) {
-                        GateQuestionsActivity.answers.put(co,String.valueOf(s));
+                        GateQuestionsActivity.correctanswers.put(co,String.valueOf(s));
                     }
                     else{
-                        GateQuestionsActivity.answers.put(co,String.valueOf(s));
+                        GateQuestionsActivity.correctanswers.put(co,String.valueOf(s));
                     }
                 }
 
@@ -299,9 +298,11 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     getActivity().finish();
                 }else if(examMode.equals("test")){
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("rightanswers",GateQuestionsActivity.answers.size());
+                    intent.putExtra("rightanswers",GateQuestionsActivity.correctanswers.size());
                     intent.putExtra("totalqu",totalQuestions);
                     intent.putStringArrayListExtra("listdesc",list);
+                    intent.putExtra("questions",GateQuestionsActivity.questions);
+                    intent.putExtra("answers",GateQuestionsActivity.answers);
                     intent.putExtra("overalltime",time);
                     startActivity(intent);
                     getActivity().finish();
@@ -328,8 +329,7 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     opt4.setBackgroundColor(Color.WHITE);
                     opt5.setBackgroundColor(Color.WHITE);
                     if (optIndex.get(1)==Integer.parseInt(correctAnswer)) {
-                        GateQuestionsActivity.answers.put(Integer.valueOf(count),correctAnswer);
-
+                        GateQuestionsActivity.correctanswers.put(Integer.parseInt(count),correctAnswer);
 
                     } else {
 
@@ -357,7 +357,7 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     opt4.setBackgroundColor(Color.WHITE);
                     opt5.setBackgroundColor(Color.WHITE);
                     if (optIndex.get(2)==Integer.parseInt(correctAnswer)) {
-                        GateQuestionsActivity.answers.put(Integer.valueOf(count),correctAnswer);
+                        GateQuestionsActivity.correctanswers.put(Integer.parseInt(count),correctAnswer);
                     } else {
 
                     }
@@ -386,8 +386,7 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     opt4.setBackgroundColor(Color.WHITE);
                     opt5.setBackgroundColor(Color.WHITE);
                     if (optIndex.get(3)==Integer.parseInt(correctAnswer)) {
-                        GateQuestionsActivity.answers.put(Integer.valueOf(count),correctAnswer);
-
+                        GateQuestionsActivity.correctanswers.put(Integer.parseInt(count),correctAnswer);
 
                     } else {
 
@@ -415,8 +414,7 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     opt1.setBackgroundColor(Color.WHITE);
                     opt5.setBackgroundColor(Color.WHITE);
                     if (optIndex.get(4)==Integer.parseInt(correctAnswer)) {
-                        GateQuestionsActivity.answers.put(Integer.valueOf(count),correctAnswer);
-
+                        GateQuestionsActivity.correctanswers.put(Integer.parseInt(count),correctAnswer);
 
                     } else {
 
@@ -443,8 +441,7 @@ public class GateFragment extends Fragment implements View.OnClickListener,View.
                     opt1.setBackgroundColor(Color.WHITE);
                     opt4.setBackgroundColor(Color.WHITE);
                     if (optIndex.get(5)==Integer.parseInt(correctAnswer)) {
-                        GateQuestionsActivity.answers.put(Integer.valueOf(count),correctAnswer);
-
+                        GateQuestionsActivity.correctanswers.put(Integer.parseInt(count),correctAnswer);
                     } else {
 
                     }

@@ -175,6 +175,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(rrbonline);
                 break;
             case R.id.gateexam:
+                editor = settings.edit();
+                editor.putString("RRBTYPE","gate");
+                editor.commit();
                 Intent gate = new Intent(DashboardActivity.this,GateActivity.class);
                 startActivity(gate);
                 break;
